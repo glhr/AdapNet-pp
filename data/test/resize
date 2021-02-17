@@ -1,0 +1,4 @@
+# convert -resize 768X384! rgb.png rgb.resized.png
+
+mkdir resized
+mogrify -resize "768X384!" -path resized *.png

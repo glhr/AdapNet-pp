@@ -20,6 +20,9 @@ import numpy as np
 import tensorflow as tf
 import yaml
 from dataset.helper import *
+from utils.label2rgb import *
+
+import cv2
 
 PARSER = argparse.ArgumentParser()
 PARSER.add_argument('-c', '--config', default='config/cityscapes_test.config')
@@ -43,13 +46,9 @@ def test_func(config):
     import_variables = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
     print 'total_variables_loaded:', len(import_variables)
     # print(import_variables)
-    # saver = tf.train.Saver(import_variables)
+    saver = tf.train.Saver(import_variables)
     # print(tf.train.list_variables(config['checkpoint']))
-    # saver.restore(sess, config['checkpoint'])
-    #
-    new_saver = tf.train.import_meta_graph(config['checkpoint']+".meta",
-      clear_devices=True)
-    new_saver.restore(sess, config['checkpoint'])
+    saver.restore(sess, config['checkpoint'])
     sess.run(iterator.initializer)
     step = 0
     total_num = 0
@@ -61,9 +60,18 @@ def test_func(config):
             probabilities = sess.run([model.softmax], feed_dict=feed_dict)
             prediction = np.argmax(probabilities[0], 3)
             gt = np.argmax(label, 3)
-            prediction[gt == 0] = 0
+            # prediction[gt == 0] = 0
             output_matrix = compute_output_matrix(gt, prediction, output_matrix)
             total_num += label.shape[0]
+            for i in range(prediction.shape[0]):
+                print(np.min(prediction[i]),np.max(prediction[i]))
+                #
+                # labels = np.uint8(prediction[i])
+                # print(labels.shape)
+                # lut = gen_lut()
+                # rgb = labels2rgb(labels, lut)
+                rgb = np.uint8(255 * prediction[i]/np.max(prediction[i]))
+                cv2.imwrite("test{}.png".format(i), rgb)
             if (step+1) % config['skip_step'] == 0:
                 print '%s %s] %d. iou updating' \
                   % (str(datetime.datetime.now()), str(os.getpid()), total_num)

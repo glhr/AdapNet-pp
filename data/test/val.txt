@@ -1,0 +1,4 @@
+/home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/filename00047.png /home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/gt.png
+/home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/I00359.png /home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/gt.png
+/home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/rgb.png /home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/gt.png
+/home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/city2.png /home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/resized/gt.png
