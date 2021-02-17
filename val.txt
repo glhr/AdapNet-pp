@@ -1,0 +1,1 @@
+/home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/rgb.resized.png /home/robotlab/rob10/learning-driveability-heatmaps/models/ssma/AdapNet-pp/data/test/gt.resized.png

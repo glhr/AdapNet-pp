@@ -42,8 +42,14 @@ def test_func(config):
     sess.run(tf.global_variables_initializer())
     import_variables = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
     print 'total_variables_loaded:', len(import_variables)
-    saver = tf.train.Saver(import_variables)
-    saver.restore(sess, config['checkpoint'])
+    # print(import_variables)
+    # saver = tf.train.Saver(import_variables)
+    # print(tf.train.list_variables(config['checkpoint']))
+    # saver.restore(sess, config['checkpoint'])
+    #
+    new_saver = tf.train.import_meta_graph(config['checkpoint']+".meta",
+      clear_devices=True)
+    new_saver.restore(sess, config['checkpoint'])
     sess.run(iterator.initializer)
     step = 0
     total_num = 0
@@ -73,7 +79,7 @@ def main():
     args = PARSER.parse_args()
     if args.config:
         file_address = open(args.config)
-        config = yaml.load(file_address)
+        config = yaml.safe_load(file_address)
     else:
         print '--config config_file_address missing'
     test_func(config)
