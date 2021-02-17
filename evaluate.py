@@ -64,13 +64,11 @@ def test_func(config):
             output_matrix = compute_output_matrix(gt, prediction, output_matrix)
             total_num += label.shape[0]
             for i in range(prediction.shape[0]):
-                print(np.min(prediction[i]),np.max(prediction[i]))
-                #
-                # labels = np.uint8(prediction[i])
+                # print(np.min(prediction[i]),np.max(prediction[i]))
+                labels = np.uint8(prediction[i])
                 # print(labels.shape)
-                # lut = gen_lut()
-                # rgb = labels2rgb(labels, lut)
-                rgb = np.uint8(255 * prediction[i]/np.max(prediction[i]))
+                rgb = label2rgb(labels, n_classes=config['num_classes'])
+                # rgb = np.uint8(255 * prediction[i]/np.max(prediction[i]))
                 cv2.imwrite("test{}.png".format(i), rgb)
             if (step+1) % config['skip_step'] == 0:
                 print '%s %s] %d. iou updating' \
