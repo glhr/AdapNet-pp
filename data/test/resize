@@ -2,3 +2,4 @@
 
 mkdir resized
 mogrify -resize "768X384!" -path resized *.png
+mogrify -resize "768X384!" -path resized *.jpg

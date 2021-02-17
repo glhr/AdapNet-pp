@@ -27,6 +27,9 @@ def label2rgb(labels, n_classes=12):
         blank[labels==cls] = adaptnet_labels[cls]
     return cv2.cvtColor(blank, cv2.COLOR_BGR2RGB)
 
+def combine_result(img,rgb):
+    return np.concatenate((img,rgb), axis=1)
+
 if __name__ == '__main__':
   labels = np.arange(256).astype(np.uint8)[np.newaxis, :]
   lut = gen_lut()

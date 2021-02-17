@@ -67,9 +67,10 @@ def test_func(config):
                 # print(np.min(prediction[i]),np.max(prediction[i]))
                 labels = np.uint8(prediction[i])
                 # print(labels.shape)
-                rgb = label2rgb(labels, n_classes=config['num_classes'])
+                labels = label2rgb(labels, n_classes=config['num_classes'])
+                res = combine_result(img[i],labels)
                 # rgb = np.uint8(255 * prediction[i]/np.max(prediction[i]))
-                cv2.imwrite("test{}.png".format(i), rgb)
+                cv2.imwrite("test{}.png".format(i), res)
             if (step+1) % config['skip_step'] == 0:
                 print '%s %s] %d. iou updating' \
                   % (str(datetime.datetime.now()), str(os.getpid()), total_num)
